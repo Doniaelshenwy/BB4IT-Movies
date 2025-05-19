@@ -1,0 +1,42 @@
+{
+  "originHash" : "44fe6895f15bb51f34c2e0aa117a0830b13bfc9a1584cdf0c8a712c3badbce08",
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "revision" : "513364f870f6bfc468f9d2ff0a95caccc10044c5",
+        "version" : "5.10.2"
+      }
+    },
+    {
+      "identity" : "alamofireeasylogger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jankaltoun/AlamofireEasyLogger",
+      "state" : {
+        "revision" : "40224e5206d8f6561561c2b8d1a217d0c500253d",
+        "version" : "1.6.0"
+      }
+    },
+    {
+      "identity" : "nvactivityindicatorview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ninjaprox/NVActivityIndicatorView.git",
+      "state" : {
+        "revision" : "121455c4e630fcb95aaefd7e4257b0c2e3cfe6d5",
+        "version" : "5.2.0"
+      }
+    },
+    {
+      "identity" : "sdwebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "state" : {
+        "revision" : "cac9a55a3ae92478a2c95042dcc8d9695d2129ca",
+        "version" : "5.21.0"
+      }
+    }
+  ],
+  "version" : 3
+}
