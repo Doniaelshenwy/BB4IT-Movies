@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ListViewController" customModule="BB4IT_Movies" customModuleProvider="target">
+            <connections>
+                <outlet property="categoriesCollectionView" destination="bV2-6E-iRJ" id="uwL-PD-YTf"/>
+                <outlet property="moviesCollectionView" destination="8dD-W5-9cY" id="7CO-ep-61n"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="nHg-S5-i4l">
+                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m1K-O6-hin">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="52"/>
+                            <subviews>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="bV2-6E-iRJ">
+                                    <rect key="frame" x="16" y="2" width="361" height="48"/>
+                                    <color key="backgroundColor" name="blackBGColor"/>
+                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OHm-bn-vjJ">
+                                        <size key="itemSize" width="128" height="128"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </collectionViewFlowLayout>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="8"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </collectionView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="52" id="IMd-wm-hg5"/>
+                                <constraint firstAttribute="trailing" secondItem="bV2-6E-iRJ" secondAttribute="trailing" constant="16" id="OYd-H2-fVM"/>
+                                <constraint firstItem="bV2-6E-iRJ" firstAttribute="top" secondItem="m1K-O6-hin" secondAttribute="top" constant="2" id="Pe3-LN-oIl"/>
+                                <constraint firstItem="bV2-6E-iRJ" firstAttribute="leading" secondItem="m1K-O6-hin" secondAttribute="leading" constant="16" id="ffy-7U-2t8"/>
+                                <constraint firstAttribute="bottom" secondItem="bV2-6E-iRJ" secondAttribute="bottom" constant="2" id="kN6-Ap-SZe"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="8dD-W5-9cY">
+                            <rect key="frame" x="0.0" y="76" width="393" height="683"/>
+                            <color key="backgroundColor" name="blackColor"/>
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="btg-1t-UMn">
+                                <size key="itemSize" width="128" height="128"/>
+                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            </collectionViewFlowLayout>
+                        </collectionView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="blackColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="nHg-S5-i4l" secondAttribute="trailing" id="27k-3t-jX3"/>
+                <constraint firstItem="nHg-S5-i4l" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="GEI-5g-i1m"/>
+                <constraint firstItem="nHg-S5-i4l" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="T9x-bO-g97"/>
+                <constraint firstItem="nHg-S5-i4l" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="v07-mh-hMD"/>
+            </constraints>
+            <point key="canvasLocation" x="-34" y="20"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="blackBGColor">
+            <color red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="blackColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

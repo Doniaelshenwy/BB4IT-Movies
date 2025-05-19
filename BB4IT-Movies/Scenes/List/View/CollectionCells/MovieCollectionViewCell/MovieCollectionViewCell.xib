@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="MovieCollectionViewCell" customModule="BB4IT_Movies" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="273" height="418"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="273" height="418"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xcx-dy-Lza">
+                        <rect key="frame" x="16" y="0.0" width="241" height="402"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="PHq-dV-QcT">
+                                <rect key="frame" x="0.0" y="0.0" width="241" height="402"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="movie" translatesAutoresizingMaskIntoConstraints="NO" id="rkj-T8-ach">
+                                        <rect key="frame" x="0.0" y="0.0" width="241" height="321.66666666666669"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNi-lQ-b5q">
+                                        <rect key="frame" x="0.0" y="333.66666666666669" width="241" height="40.333333333333314"/>
+                                        <mutableString key="text">Ant Man Wasp: Quantumania  Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania  Ant Man Wasp: Quantumania  Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania  Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania  Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania Ant Man Wasp: Quantumania </mutableString>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                        <color key="textColor" name="primaryColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="JER-bY-2uS">
+                                        <rect key="frame" x="0.0" y="386" width="241" height="16"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="SXI-Ul-29T">
+                                                <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="16" id="ti3-dF-KHM"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="25.12.2022" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clc-5A-SIK">
+                                                <rect key="frame" x="20" y="0.0" width="221" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" name="whiteColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="16" id="aIG-Yg-HKL"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="rkj-T8-ach" firstAttribute="height" secondItem="PHq-dV-QcT" secondAttribute="height" multiplier="0.8" id="NG2-e7-NBq"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="PHq-dV-QcT" secondAttribute="bottom" id="07V-hf-oIz"/>
+                            <constraint firstItem="PHq-dV-QcT" firstAttribute="top" secondItem="xcx-dy-Lza" secondAttribute="top" id="HHy-EP-k2c"/>
+                            <constraint firstAttribute="trailing" secondItem="PHq-dV-QcT" secondAttribute="trailing" id="N9V-H4-vx5"/>
+                            <constraint firstItem="PHq-dV-QcT" firstAttribute="leading" secondItem="xcx-dy-Lza" secondAttribute="leading" id="hAK-nq-eGb"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="xcx-dy-Lza" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="33E-tW-2Cy"/>
+                <constraint firstAttribute="trailing" secondItem="xcx-dy-Lza" secondAttribute="trailing" constant="16" id="3dC-F0-69X"/>
+                <constraint firstAttribute="bottom" secondItem="xcx-dy-Lza" secondAttribute="bottom" constant="16" id="t7l-Bx-irl"/>
+                <constraint firstItem="xcx-dy-Lza" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="wuk-uD-NoA"/>
+            </constraints>
+            <size key="customSize" width="273" height="418"/>
+            <connections>
+                <outlet property="dateLabel" destination="clc-5A-SIK" id="HIW-sM-OzU"/>
+                <outlet property="movieImage" destination="rkj-T8-ach" id="O8u-9x-ALz"/>
+                <outlet property="movieTitleLabel" destination="cNi-lQ-b5q" id="LvJ-w8-hGy"/>
+            </connections>
+            <point key="canvasLocation" x="135.1145038167939" y="149.29577464788733"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="calendar" width="16" height="16"/>
+        <image name="movie" width="391" height="583"/>
+        <namedColor name="primaryColor">
+            <color red="0.9882352941176471" green="0.7686274509803922" blue="0.20392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="whiteColor">
+            <color red="0.87058823529411766" green="0.87058823529411766" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
