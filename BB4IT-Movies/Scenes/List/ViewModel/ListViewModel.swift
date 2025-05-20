@@ -17,7 +17,7 @@ final class ListViewModel {
     private let network: NetworkProtocol = NetworkManager()
     private var moviesData: MoviesResponse?
         
-    var categoriesData = [
+    private var categoriesData = [
         CategoriesModel(title: "Now Playing", keypath: "now_playing"),
         CategoriesModel(title: "Popular", keypath: "popular"),
         CategoriesModel(title: "Upcoming", keypath: "upcoming")
@@ -28,17 +28,10 @@ final class ListViewModel {
         categoriesData.first?.isSelected = true
         getMoviesDataRequest(type: categoriesData.first?.keypath ?? "")
     }
-    
-    func selectedCategoryData(index: Int) {
-        categoriesData.forEach { $0.isSelected = false }
-        categoriesData[index].isSelected = true
-        indexSelectedCategory = index
-        getMoviesDataRequest(type: categoriesData[index].keypath)
-    }
 }
 
 // MARK: Get Data From API
-extension ListViewModel {
+private extension ListViewModel {
     func getMoviesDataRequest(type: String) {
         isLoading = true
         let request = AppEndPoints.getMovies(type)
@@ -57,11 +50,28 @@ extension ListViewModel {
 }
 
 extension ListViewModel {
-    var numberOfMoviesRow: Int {
+    var numberOfMovies: Int {
         moviesData?.results?.count ?? 0
     }
     
-    func cellMoviesData(index: Int) -> Movie? {
+    func cellMoviesData(index: Int) -> MovieResponse? {
         moviesData?.results?[index]
+    }
+}
+
+extension ListViewModel {
+    var numberOfCategories: Int {
+        categoriesData.count
+    }
+    
+    func categoriesCellData(index: Int) -> CategoriesModel {
+        categoriesData[index]
+    }
+    
+    func selectCategory(index: Int) {
+        categoriesData.forEach { $0.isSelected = false }
+        categoriesData[index].isSelected = true
+        indexSelectedCategory = index
+        getMoviesDataRequest(type: categoriesData[index].keypath)
     }
 }

@@ -17,7 +17,7 @@ final class MovieCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func configureCell(data: Movie?) {
+    func configureCell(data: MovieResponse?) {
         movieTitleLabel.text = data?.title ?? ""
         dateLabel.text = data?.releaseDate ?? ""
         movieImage.loadTMDbImage(from: "\(data?.posterPath ?? "")")

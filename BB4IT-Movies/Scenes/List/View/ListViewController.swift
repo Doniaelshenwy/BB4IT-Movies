@@ -13,6 +13,9 @@ final class ListViewController: BaseViewController {
     @IBOutlet private weak var categoriesCollectionView: UICollectionView!
     
     private let viewModel = ListViewModel()
+    private var collectionViews: [UICollectionView] {
+        [moviesCollectionView, categoriesCollectionView]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,56 +30,57 @@ final class ListViewController: BaseViewController {
     }
 }
 
-// MARK: Setup UICollection Delegate and DataSource
-extension ListViewController: CollectionViewConfig {
+private extension ListViewController {
+    
+    func isMoviesCollectionView(_ collectionView: UICollectionView) -> Bool {
+        collectionView == moviesCollectionView
+    }
     
     func setCollectionView() {
-        [categoriesCollectionView, moviesCollectionView].forEach { $0?.delegate = self }
-        [categoriesCollectionView, moviesCollectionView].forEach { $0?.dataSource = self }
+        collectionViews.forEach {
+            $0.delegate = self
+            $0.dataSource = self
+        }
         categoriesCollectionView.registerCell(cellClass: CategoryCollectionViewCell.self)
         moviesCollectionView.registerCell(cellClass: MovieCollectionViewCell.self)
     }
+}
+
+// MARK: Setup UICollection Delegate and DataSource
+extension ListViewController: CollectionViewConfig {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch collectionView {
-        case categoriesCollectionView:
-            viewModel.categoriesData.count
-        default:
-            viewModel.numberOfMoviesRow
-        }
+        isMoviesCollectionView(collectionView) ? viewModel.numberOfMovies : viewModel.numberOfCategories
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch collectionView {
-        case categoriesCollectionView:
-            let cell = collectionView.dequeue(with: CategoryCollectionViewCell.self, for: indexPath)
-            cell.configureCell(data: viewModel.categoriesData[indexPath.row])
-            return cell
-        default:
-            let cell = collectionView.dequeue(with: MovieCollectionViewCell.self, for: indexPath)
-            cell.configureCell(data: viewModel.cellMoviesData(index: indexPath.row))
-            return cell
-        }
+        isMoviesCollectionView(collectionView) ? setUpMoviesCollectionView(for: indexPath) : setUpCategoriesCollectionView(for: indexPath)
+    }
+    
+    private func setUpCategoriesCollectionView(for indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = categoriesCollectionView.dequeue(with: CategoryCollectionViewCell.self, for: indexPath)
+        cell.configureCell(data: viewModel.categoriesCellData(index: indexPath.row))
+        return cell
+    }
+    
+    private func setUpMoviesCollectionView(for indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = moviesCollectionView.dequeue(with: MovieCollectionViewCell.self, for: indexPath)
+        cell.configureCell(data: viewModel.cellMoviesData(index: indexPath.row))
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch collectionView {
-        case categoriesCollectionView:
-            viewModel.selectedCategoryData(index: indexPath.row)
-        default:
-            break
-        }
+        isMoviesCollectionView(collectionView) ?
+        push(MovieDetailsViewController(movieId: viewModel.cellMoviesData(index: indexPath.row)?.id ?? 0)) :
+        viewModel.selectCategory(index: indexPath.row)
     }
 }
 
 extension ListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        switch collectionView {
-        case categoriesCollectionView:
-            CGSize(width: categoriesCollectionView.frame.width / 3, height: 40)
-        default:
-            CGSize(width: moviesCollectionView.frame.width, height: moviesCollectionView.frame.height)
-        }
+        isMoviesCollectionView(collectionView) ?
+        CGSize(width: moviesCollectionView.frame.width, height: moviesCollectionView.frame.height) :
+        CGSize(width: categoriesCollectionView.frame.width / 3, height: 40)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -88,7 +92,7 @@ extension ListViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// MARK: UI BIND
+// MARK: Bind UI
 private extension ListViewController {
     
     func bindUI() {
@@ -109,24 +113,23 @@ private extension ListViewController {
     func bindReloadViews() {
         viewModel.$reloadViews.sink { [weak self] reload in
             guard let self, reload else { return }
-            [categoriesCollectionView, moviesCollectionView].forEach { $0?.reloadData() }
-            if viewModel.numberOfMoviesRow != 0 {
-                moviesCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: false)
-            }
+            collectionViews.forEach { $0.reloadData() }
+            guard viewModel.numberOfMovies > 0 else { return }
+            moviesCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: false)
         }.store(in: &cancellable)
     }
     
     func bindIndicator() {
         viewModel.$isLoading.sink { [weak self] start in
             guard let self else { return }
-            start ? self.activityIndicatorView.startAnimating() : self.activityIndicatorView.stopAnimating()
+            start ? startLoading() : stopLoading()
         }.store(in: &cancellable)
     }
     
     func bindShowOkAlert() {
         viewModel.$showAlert.sink { [weak self] text in
             guard let self, let text else { return }
-            self.makeOkAlert(title: text)
+            makeOkAlert(title: text)
         }.store(in: &cancellable)
     }
 }

@@ -15,6 +15,11 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    func configureGenreCell(data: GenreResponse?) {
+        categoryLabel.text = data?.name ?? ""
+        categoryView.backgroundColor = .blackBG
+    }
 
     func configureCell(data: CategoriesModel) {
         categoryLabel.text = data.title
@@ -22,13 +27,7 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     }
     
     private func selectedCategory(_ status: Bool) {
-        switch status {
-        case true:
-            categoryView.backgroundColor = .primary
-            categoryLabel.textColor = .black
-        default:
-            categoryView.backgroundColor = .clear
-            categoryLabel.textColor = .white
-        }
+        categoryView.backgroundColor = status ? .primary : .clear
+        categoryLabel.textColor = status ? .black : .white
     }
 }

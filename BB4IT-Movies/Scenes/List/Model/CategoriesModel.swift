@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CategoriesModel {
+final class CategoriesModel {
     var title: String
     var keypath: String
     var isSelected: Bool
