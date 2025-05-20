@@ -9,24 +9,32 @@ import UIKit
 import SDWebImage
 
 extension UIImageView {
-    func loadTMDbImage(from posterPath: String?, size: String = "w500") {
-        guard let posterPath = posterPath else {
-            print("Poster path is nil")
+    private var setupLoader: UIActivityIndicatorView {
+        let activityIndicatorView = UIActivityIndicatorView(style: .medium)
+        
+        addSubview(activityIndicatorView)
+        activityIndicatorView.centerInSuperview()
+        activityIndicatorView.startAnimating()
+        activityIndicatorView.color = .primary
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.hidesWhenStopped = true
+        return activityIndicatorView
+    }
+    
+    func loadTMDbImage(from stringURL: String?, _ placeholder: UIImage? = .init(named: "logo")) {
+        guard let stringURL,
+              let url = URL(string: "https://image.tmdb.org/t/p/w500/\(stringURL)") else {
+            self.image = placeholder
             return
         }
-        let imageUrlString = "https://image.tmdb.org/t/p/\(size)\(posterPath)"
-        print("Loading image from URL: \(imageUrlString)")
-        guard let imageUrl = URL(string: imageUrlString) else {
-            print("Invalid image URL")
-            return
-        }
-
-        self.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "logo")) { image, error, _, _ in
-            if let error = error {
-                print("Failed to load image with SDWebImage: \(error.localizedDescription)")
-            } else {
-                print("Image loaded successfully")
-            }
+        
+        let activityIndicatorView = setupLoader
+        let options: SDWebImageOptions = [.continueInBackground]
+        
+        self.sd_setImage(with: url, placeholderImage: placeholder, options: options) { [weak self] image, error, cache, url in
+            guard let self else { return }
+            activityIndicatorView.removeFromSuperview()
+            self.image = image
         }
     }
 }

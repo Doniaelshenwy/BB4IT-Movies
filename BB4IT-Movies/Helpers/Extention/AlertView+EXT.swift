@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CDAlertView
 
 extension UIViewController {
     func makeOkAlert(title: String, SubTitle: String = "", Image : UIImage = UIImage()) {
