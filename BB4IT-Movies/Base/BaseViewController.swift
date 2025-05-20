@@ -6,17 +6,21 @@
 //
 
 import UIKit
-import NVActivityIndicatorView
 
 class BaseViewController: UIViewController {
     
-    private var frame = CGRect()
-    var activityIndicatorView = NVActivityIndicatorView(frame: CGRect())
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.frame = .init(x: 0, y: 0, width: 80, height: 80)
+        indicator.color = .primary
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
     var cancellable = Cancellable()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpActivityIndicator()
      }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -29,45 +33,34 @@ class BaseViewController: UIViewController {
         self.navigationController?.navigationBar.setNeedsLayout()
         self.navigationController?.navigationBar.layoutIfNeeded()
     }
+    
+    func startLoading() {
+        view.addSubview(activityIndicator)
+        activityIndicator.center = view.center
+        activityIndicator.startAnimating()
+    }
+    
+    func stopLoading() {
+        activityIndicator.removeFromSuperview()
+        activityIndicator.stopAnimating()
+    }
 }
 
 private extension BaseViewController {
-    
-    func setUpActivityIndicator() {
-        frame = CGRect(x: self.view.frame.width / 2 , y: self.view.frame.height / 2, width: 0, height: 0)
-        activityIndicatorView = NVActivityIndicatorView(frame: frame, type: .ballScale)
-        activityIndicatorView.color = .primary
-        activityIndicatorView.padding = 100
-        self.view.addSubview(activityIndicatorView )
-    }
     
     func setUpNavigation() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = .clear
-        appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         let backItemAppearance = UIBarButtonItemAppearance()
-        backItemAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear] // Fix text color
+        backItemAppearance.normal.titleTextAttributes = [.foregroundColor: UIColor.clear]
         appearance.backButtonAppearance = backItemAppearance
-        
-        var image = UIImage(named: "arrow-white-left")!.withRenderingMode(.alwaysOriginal)
-        appearance.setBackIndicatorImage(image, transitionMaskImage: image)
-        UINavigationBar.appearance().tintColor = UIColor.black
-        appearance.titleTextAttributes = [
-            NSAttributedString.Key.foregroundColor: UIColor(named: "blackColor") ?? .black,
-            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)
-        ]
+        appearance.setBackIndicatorImage(.arrowLeft, transitionMaskImage: .arrowLeft)
         
         self.navigationController?.navigationBar.standardAppearance = appearance
-        self.navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().compactAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-        
         self.navigationController?.navigationBar.setNeedsLayout()
         self.navigationController?.navigationBar.layoutIfNeeded()
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 }
